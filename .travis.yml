@@ -5,20 +5,20 @@ services:
   - docker
 
 before_install:
-  - docker build -t ssimonTW/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t ssimon/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true ssimonTW/react-test npm test
+  - docker run -e CI=true ssimon/react-test npm test
 
 after_success:
-  - docker build -t ssimonTW/multi-client ./client
-  - docker build -t ssimonTW/multi-nginx ./nginx
-  - docker build -t ssimonTW/multi-server ./server
-  - docker build -t ssimonTW/multi-worker ./worker
+  - docker build -t ssimon/multi-client ./client
+  - docker build -t ssimon/multi-nginx ./nginx
+  - docker build -t ssimon/multi-server ./server
+  - docker build -t ssimon/multi-worker ./worker
   # Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Take those images and push them to docker hub
-  - docker push ssimonTW/multi-client
-  - docker push ssimonTW/multi-nginx
-  - docker push ssimonTW/multi-server
-  - docker push ssimonTW/multi-worker
+  - docker push ssimon/multi-client
+  - docker push ssimon/multi-nginx
+  - docker push ssimon/multi-server
+  - docker push ssimon/multi-worker
